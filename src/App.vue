@@ -8,8 +8,19 @@
           :currentTemp="currentTemp"
           :currentSky="currentSky"
       />
-
+      <currentStats
+          :pressure="pressureMb"
+          :humidity="humidity"
+          :windDirection="windDirection"
+          :windPower="windPowerMph"
+      />
     </div>
+
+    <graph
+        :temperature="forecastZeroTemperature"
+        :chanceOfRain="forecastZeroRainChance"
+        class="current__graph"
+    />
 
 
 
@@ -19,11 +30,13 @@
 <script>
 import top from "@/components/top"
 import currentMid from "@/components/current-mid"
+import currentStats from "@/components/current-stats";
+import graph from "@/components/Graph";
 import axios from "axios";
 
 export default {
   components:{
-    top,currentMid
+    top,currentMid,currentStats,graph
   },
   created(){
     let params = new URLSearchParams(window.location.search);
@@ -41,6 +54,20 @@ export default {
             console.log(response.data)
             this.currentTemp = response.data.current.temp_c > 0 ? "+" + response.data.current.temp_c : response.data.current.temp_c
             this.currentSky = response.data.current.condition.icon
+            this.pressureMb = response.data.current.pressure_mb
+            this.humidity = response.data.current.humidity
+            this.windDirection = response.data.current.wind_dir
+            this.windPowerMph = response.data.current.wind_mph
+            this.forecastZeroTemperature = []
+            this.forecastZeroRainChance=[]
+            response.data.forecast.forecastday[0].hour.forEach((el)=>{
+              this.forecastZeroTemperature.push(el.temp_c)
+            })
+            response.data.forecast.forecastday[0].hour.forEach((el)=>{
+              this.forecastZeroRainChance.push(el.chance_of_rain)
+            })
+            console.log(this.forecastZeroRainChance, 'kek')
+
           })
           .catch(error => {
             console.log(error)
@@ -53,6 +80,12 @@ export default {
       location: "Tambov",
       currentTemp: "0_0",
       currentSky: "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+      pressureMb : '?',
+      humidity: '?',
+      windPowerMph: '?',
+      windDirection: '?',
+      forecastZeroTemperature: [],
+      forecastZeroRainChance:[],
     }
 
   },
@@ -69,8 +102,21 @@ export default {
 }
 .current {
   background: linear-gradient(180deg, #000000 -32.39%, #153470 50.04%, #000000 138.91%);
+  border-bottom-left-radius: 45px;
+  border-bottom-right-radius: 45px;
+  position: relative;
 }
+.current__graph {
+  background: #c8c8c8;
+  min-width: 300px;
+  width: 90vw;
+  border-radius: 25px;
+  box-shadow: #00000070 -5px 5px 15px;
+  left: 50%;
+  margin: auto;
+  transform: translateY(30%);
 
+}
 
 
 </style>
