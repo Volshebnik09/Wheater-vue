@@ -94,13 +94,10 @@ export default {
         options: {
           responsive: true,
           aspectRatio: 1.5,
-          onResize(chart, size) {
-            chart.aspe
-            console.log(size)
-          },
+
           plugins: {
             title: {
-              display: true,
+              display: false,
               text: 'Chart.js Line Chart - Cubic interpolation mode'
             },
           },

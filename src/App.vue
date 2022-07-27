@@ -23,6 +23,8 @@
     />
 
 
+  </div>
+  <div class="forecast">
 
   </div>
 </template>
@@ -66,7 +68,6 @@ export default {
             response.data.forecast.forecastday[0].hour.forEach((el)=>{
               this.forecastZeroRainChance.push(el.chance_of_rain)
             })
-            console.log(this.forecastZeroRainChance, 'kek')
 
           })
           .catch(error => {
@@ -95,6 +96,11 @@ export default {
 </script>
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+#app {
+  max-width: 360px;
+  margin: auto;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -105,16 +111,19 @@ export default {
   border-bottom-left-radius: 45px;
   border-bottom-right-radius: 45px;
   position: relative;
+  padding-bottom: 150px;
 }
 .current__graph {
   background: #c8c8c8;
-  min-width: 300px;
-  width: 90vw;
   border-radius: 25px;
   box-shadow: #00000070 -5px 5px 15px;
+  position: absolute;
+  bottom: -30%;
   left: 50%;
-  margin: auto;
-  transform: translateY(30%);
+  transform: translateX(-50%);
+}
+
+.forecast {
 
 }
 

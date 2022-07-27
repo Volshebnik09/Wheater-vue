@@ -148,7 +148,7 @@ export default {
       background: transparent;
       border: none;
       outline: none;
-      width: calc(100vw - 20px - 60px);
+      width: 100%;
 
       max-width: 400px;
       font-family: 'Montserrat';
