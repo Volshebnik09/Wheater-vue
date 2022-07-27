@@ -124,6 +124,7 @@ export default {
   max-width: 400px;
   margin: auto;
   background: white;
+  overflow: hidden;
 }
 
 * {

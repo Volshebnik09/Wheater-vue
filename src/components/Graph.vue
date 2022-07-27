@@ -113,7 +113,7 @@ export default {
             },
             y: {
               display: true,
-              suggestedMin: 0,
+              suggestedMin: -40,
               suggestedMax: 100
             }
           }
