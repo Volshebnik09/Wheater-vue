@@ -15,7 +15,7 @@
         </div>
       </div>
     </form>
-    <img src="@/images/bx_cog.svg" alt="" class="settings">
+<!--    <img src="@/images/bx_cog.svg" alt="" class="settings">-->
   </div>
 </template>
 
